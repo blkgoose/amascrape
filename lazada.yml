@@ -1,0 +1,15 @@
+price:
+    css: span.pdp-price.pdp-price_type_normal
+    type: Text
+name:
+    css: span.pdp-mod-product-badge-title
+    type: Text
+votes:
+    css: 'div.pdp-review-summary div.container-star'
+    type: Text
+ratings:
+    css: 'div.pdp-review-summary a.pdp-link:nth-of-type(1)'
+    type: Text
+test:
+    xpath: '//span[contains(concat(" ",normalize-space(@class)," ")," pdp-product-price__discount ")]'
+    type: Text

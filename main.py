@@ -2,14 +2,16 @@ from selectorlib import Extractor
 import json
 import sys
 import urllib.request
+import requests_html
 
 website = sys.argv[1]
 extractor_file = sys.argv[2]
 
-# get the webpage
-with urllib.request.urlopen(website) as resource:
-    # read the page content
-    html = resource.read().decode(resource.headers.get_content_charset())
+# read the page content
+with requests_html.HTMLSession() as session:
+    r = session.get(website)
+    js = r.html.render(timeout=0)
+    html = r.html.html
 
     # load the selectorlib file
     # search for selectorlib chrome extensions and

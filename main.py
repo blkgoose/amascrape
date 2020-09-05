@@ -1,18 +1,17 @@
 from selectorlib import Extractor
 import json
 import sys
-import urllib.request
-import requests_html
+import os.path
 
-website = sys.argv[1]
-extractor_file = sys.argv[2]
+extractor_file = sys.argv[1]
+
+try:
+    in_file = sys.argv[2]
+except:
+    in_file = "/dev/stdin"
 
 # read the page content
-with requests_html.HTMLSession() as session:
-    r = session.get(website)
-    js = r.html.render(timeout=0)
-    html = r.html.html
-
+with open(in_file) as html:
     # load the selectorlib file
     # search for selectorlib chrome extensions and
     # read some example to see how to create one of the file needed to get the results
@@ -21,4 +20,4 @@ with requests_html.HTMLSession() as session:
     # print output that can be parsed by interfaces,
     # later should be saved in a file called something like "<website>_<timestamp>.json"
     # and used to then calculate statistics
-    print(json.dumps(e.extract(html), indent=4))
+    print(json.dumps(e.extract(html.read()), indent=4))
